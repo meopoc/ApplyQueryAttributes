@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="ApplyQueryAttributes.Common.Styles.FoundationStyles"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--#region Fonts-->
+
+    <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+        <On Platform="Android" Value="fasolid.otf#Solid" />
+        <On Platform="iOS" Value="FontAwesome5Free-Solid" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+        <On Platform="Android" Value="faregular.otf#Regular" />
+        <On Platform="iOS" Value="FontAwesome5Free-Regular" />
+    </OnPlatform>
+
+    <!--#endregion Fonts-->
+
+</ResourceDictionary>

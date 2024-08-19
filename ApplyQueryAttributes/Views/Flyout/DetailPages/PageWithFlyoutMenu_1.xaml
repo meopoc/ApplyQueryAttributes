@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ApplyQueryAttributes.Views.Flyout.DetailPages.PageWithFlyoutMenu_1"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="PageWithFlyoutMenu_1"
+    Shell.BackgroundColor="#36424a"
+    Shell.TitleColor="White">
+
+    <VerticalStackLayout>
+
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Name}"
+            VerticalOptions="Center" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

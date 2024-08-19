@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ApplyQueryAttributes.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fa="clr-namespace:ApplyQueryAttributes.Helpers.Icons.FontAwesome;assembly=ApplyQueryAttributes"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModel="clr-namespace:ApplyQueryAttributes.ViewModels"
+    Title="Main Page"
+    x:Name="MainPageView"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Helpers/Views/ContentTemplates/ContentTemplates.xaml" />
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="10,10,10,10">
+
+        <Button
+            Margin="0,0,0,20"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="PageA"
+            Text="Navigate to Page A" />
+
+        <StackLayout x:Name="ContentTemplatesStackLayout" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

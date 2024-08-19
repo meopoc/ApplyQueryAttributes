@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="ApplyQueryAttributes.Common.Styles.DefaultTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:foundationResources="clr-namespace:ApplyQueryAttributes.Common.Styles;assembly=ApplyQueryAttributes">
+
+    <ResourceDictionary.MergedDictionaries>
+        <foundationResources:FoundationStyles />
+        <ResourceDictionary Source="/Common/Styles/Global.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

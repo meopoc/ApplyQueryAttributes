@@ -1,0 +1,187 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+
+		<!-- Display name -->
+		<ApplicationTitle>ApplyQueryAttributes</ApplicationTitle>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ApplyQueryAttributes</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
+		
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">net8.0-android34.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('macos'))">net8.0-ios</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">net8.0-android34.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('macos'))">net8.0-ios</TargetFrameworks>
+	</PropertyGroup>
+
+	<!-- App Identifier -->
+	<PropertyGroup>
+		<ApplicationId>com.applyqueryattributes.com</ApplicationId>
+		<NeutralLanguage>en-GB</NeutralLanguage>
+	</PropertyGroup>
+
+	<!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	</PropertyGroup>-->
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="Platforms\MacCatalyst\**" />
+	  <AndroidResource Remove="Platforms\Tizen\**" />
+	  <AndroidResource Remove="Platforms\Windows\**" />
+	  <Compile Remove="Platforms\MacCatalyst\**" />
+	  <Compile Remove="Platforms\Tizen\**" />
+	  <Compile Remove="Platforms\Windows\**" />
+	  <EmbeddedResource Remove="Platforms\MacCatalyst\**" />
+	  <EmbeddedResource Remove="Platforms\Tizen\**" />
+	  <EmbeddedResource Remove="Platforms\Windows\**" />
+	  <MauiCss Remove="Platforms\MacCatalyst\**" />
+	  <MauiCss Remove="Platforms\Tizen\**" />
+	  <MauiCss Remove="Platforms\Windows\**" />
+	  <MauiXaml Remove="Platforms\MacCatalyst\**" />
+	  <MauiXaml Remove="Platforms\Tizen\**" />
+	  <MauiXaml Remove="Platforms\Windows\**" />
+	  <None Remove="Platforms\MacCatalyst\**" />
+	  <None Remove="Platforms\Tizen\**" />
+	  <None Remove="Platforms\Windows\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Helpers\FontAwesome\Resources\Fonts\FontAwesome6Free-Solid-900.otf" />
+	  <None Remove="Helpers\FontAwesome\Resources\Fonts\FontAwesomeFree-Regular-400.otf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Helpers\FontAwesome\Resources\Fonts\FontAwesome6Free-Solid-900.otf" />
+	  <EmbeddedResource Include="Helpers\FontAwesome\Resources\Fonts\FontAwesomeFree-Regular-400.otf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android34.0'">
+		<PackageReference Include="Xamarin.Firebase.Messaging">
+			<Version>124.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.Google.Dagger">
+			<Version>2.50.0</Version>
+		</PackageReference>
+		<PackageReference Include="Xamarin.GooglePlayServices.Base">
+			<Version>118.4.0</Version>
+		</PackageReference>
+		<!--Included for bug: https://github.com/dotnet/maui/issues/18665-->
+		<PackageReference Include="Xamarin.AndroidX.Fragment.Ktx">
+			<Version>1.8.1.1</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Helpers\Views\ContentTemplates\BaseContentView.xaml.cs">
+	    <DependentUpon>BaseContentView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Flyout\DetailPages\PageWithFlyoutMenu_2.xaml.cs">
+	    <DependentUpon>PageWithFlyoutMenu_2.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Flyout\DetailPages\PageWithFlyoutMenu_1.xaml.cs">
+	    <DependentUpon>PageWithFlyoutMenu_1.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Flyout\DetailPages\PageWithFlyoutMenu_2.xaml.cs">
+	    <DependentUpon>PageWithFlyoutMenu_2.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Flyout\FlyoutMenu.xaml.cs">
+	    <DependentUpon>FlyoutMenu.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Flyout\FlyoutMenu.xaml.cs">
+	    <DependentUpon>FlyoutMenu.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PageB.xaml.cs">
+	    <DependentUpon>PageB.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PageA.xaml.cs">
+	    <DependentUpon>Projects.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PageA.xaml.cs">
+	    <DependentUpon>PageA.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Helpers\Views\ContentTemplates\BaseContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Helpers\Views\ContentTemplates\ContentTemplates.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flyout\DetailPages\PageWithFlyoutMenu_1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PageB.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PageA.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flyout\DetailPages\PageWithFlyoutMenu_2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flyout\FlyoutMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Common\Styles\" />
+	</ItemGroup>
+
+</Project>
